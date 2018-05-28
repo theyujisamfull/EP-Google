@@ -4,8 +4,8 @@ x0 = 8*[1/8]
 
 def mult(B,b):
     R=[]
-    soma=0
     for i in range(8):
+        soma=0
         for j in range(8):
             soma+=B[i][j]*b[j]
         R.append(soma)
