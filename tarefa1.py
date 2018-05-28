@@ -24,4 +24,9 @@ def sub(a,b):
     return(c)
 
 def norma(a):
+    s=0
+    for i in range(len(a)):
+        s+=abs(a[i])
+    return(s)
+
     
