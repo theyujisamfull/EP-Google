@@ -8,9 +8,20 @@ def mult(B,b):
     for i in range(8):
         for j in range(8):
             soma+=B[i][j]*b[j]
-            print(i,",",j)
         R.append(soma)
     return(R)
-print(mult(A,x0))
 
+def soma(a,b):
+    c=[]
+    for i in range(8):
+        c.append(a[i]+b[i])
+    return(c)
 
+def sub(a,b):
+    c=[]
+    for i in range(8):
+        c.append(a[i]-b[i])
+    return(c)
+
+def norma(a):
+    
