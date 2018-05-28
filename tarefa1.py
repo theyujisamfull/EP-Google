@@ -2,3 +2,12 @@ A=[[0,0,0,0,0,0,0,0.5],[0.5,0,0,0,0,0,0,0],[0.5,0.5,0,0,0,0,0,0.5],[0,0.5,0,0,0,
 
 x0 = 8*[1/8]
 
+def mult(B,b):
+    R=[]
+    soma=0
+    for i in range(1,9):
+        for j in range(1,9):
+            soma=soma+B[i][j]*b[j]
+        R[i]=soma
+    return(R)
+
