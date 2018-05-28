@@ -9,6 +9,8 @@ def mult(B,b):
         for j in range(8):
             soma+=B[i][j]*b[j]
             print(i,",",j)
-        R[i]=soma
+        R.append(soma)
     return(R)
 print(mult(A,x0))
+
+
