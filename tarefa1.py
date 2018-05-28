@@ -36,6 +36,14 @@ def multEscalar(a,e):
     return(b)
 
 x=soma(multEscalar(mult(A,x0),1-m),multEscalar(x0,m))
-while
+x1=x0
+k=0 # contador
+while(norma(sub(x,x1))>10**(-5)):
+    x1=x
+    x=soma(multEscalar(mult(A,x1),1-m),multEscalar(x1,m))
+    k+=1 # contador 
+print(x) # vetor classificação
+    
+    
 
     
