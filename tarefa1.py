@@ -1,5 +1,5 @@
 A=[[0,0,0,0,0,0,0,0.5],[0.5,0,0,0,0,0,0,0],[0.5,0.5,0,0,0,0,0,0.5],[0,0.5,0,0,0,0,0,0],[0,0,0,0.5,0,0,0,0],[0,0,0.5,0.5,1,0,0,0],[0,0,0.5,0,0,1,0,0],[0,0,0,0,0,0,1,0]]
-
+m=0.15
 x0 = 8*[1/8]
 
 def mult(B,b):
@@ -28,5 +28,14 @@ def norma(a):
     for i in range(len(a)):
         s+=abs(a[i])
     return(s)
+
+def multEscalar(a,e):
+    b=[]
+    for i in range(8):
+        b.append(e*a[i])
+    return(b)
+
+x=soma(multEscalar(mult(A,x0),1-m),multEscalar(x0,m))
+while
 
     
