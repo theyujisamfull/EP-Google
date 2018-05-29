@@ -1,7 +1,7 @@
 
 matriz = []
 
-for i in range(1,21):
+for i in range(0,20):
     grupo = i
     cacique = int ((grupo*(grupo+1))/2 )
     numero_de_indios = grupo+1
@@ -11,18 +11,14 @@ for i in range(1,21):
         
     matriz.append( matriz_do_grupo )
 
-
-
-quem_sao_os_caciques = []
-for i in range(1,21):
-    quem_sao_os_caciques.append( int( (i*(i+1))/2)  )
-
-
-matriz_de_
-
-x1 = 20*[0]
-for i in matriz[0]:
-    x1[i-1]=1
-
-print(x1)
-
+matriz_den = []
+for i in range(20):
+    for j in range(len(matriz[i])):
+        if (j==0): # significa que é cacique
+            den_cacique=len(matriz[i])-1+20-1 # 20 caciques
+            matriz_den[i].append(1/den_cacique)
+        else: # significa que é indio
+            den_indio=len(matriz[i])-1
+            matriz_den[i].append(1/den_indio)
+    
+print(matriz_den)
