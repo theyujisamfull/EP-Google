@@ -6,7 +6,7 @@ matriz = []
 numeros_caciques = [] # quem é cacique
 for i in range(1,21):
     grupo = i
-    cacique = int ((grupo*(grupo+1))/2 )
+    cacique = int((grupo*(grupo+1))/2 )
     numeros_caciques.append(cacique)
     numero_de_indios = grupo+1
     matriz_do_grupo = []
@@ -42,7 +42,7 @@ def qual_grupo_e_pertence(e):
                    
                    
 
-#Declara matriz de ligação 
+#Declara matriz de ligação
 matriz_de_ligacao=[]
 
 for e in range(1,231):
@@ -78,6 +78,7 @@ V=[]
 L=[]
 C=[]
 for i in range(0,230):
+<<<<<<< HEAD
     for j in range(0,230):
         if matriz_de_ligacao[i][j] !=0:
             V.append( matriz_de_ligacao[i][j] )
@@ -154,6 +155,45 @@ for i in x:
 
 print(add)
 print(len(x))
+=======
+    for j in range(0,len(matriz_de_ligacao[i])):
+        if matriz_de_ligacao[i][j]!=0: V.append(matriz_de_ligacao[i][j])
+
+
+L=[]
+for i in range(0,230):
+    for j in range(0,len(matriz_de_ligacao[i])):
+        if matriz_de_ligacao[i][j]!=0: L.append(i)
+
+
+C=[]
+for i in range(0,230):
+    for j in range(0,len(matriz_de_ligacao[i])):
+        if matriz_de_ligacao[i][j]!=0: C.append(j)
+
+
+
+print(V,"\n")
+print(L,"\n")
+print(C,"\n")
+
+
+
+
+
+
+     
+
+
+
+
+
+    
+
+
+
+
+>>>>>>> 7f1b1662dfe1bfa45f8fd5ce082246c1324dd901
 
 
 
