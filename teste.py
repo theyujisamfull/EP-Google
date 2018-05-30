@@ -1,4 +1,35 @@
+def mult(B,b):
+    R=[]
+    for i in range(230):
+        soma=0
+        for j in range(230):
+            soma+=B[i][j]*b[j]
+        R.append(soma)
+    return(R)
 
+def soma(a,b):
+    c=[]
+    for i in range(230):
+        c.append(a[i]+b[i])
+    return(c)
+
+def sub(a,b):
+    c=[]
+    for i in range(230):
+        c.append(a[i]-b[i])
+    return(c)
+
+def norma(a):
+    s=0
+    for i in range(len(a)):
+        s+=abs(a[i])
+    return(s)
+
+def multEscalar(a,e):
+    b=[]
+    for i in range(230):
+        b.append(e*a[i])
+    return(b)
 
 
 
@@ -91,70 +122,24 @@ def calcula_y(xi):
 
     return y
 
-def mult(B,b):
-    R=[]
-    for i in range(230):
-        soma=0
-        for j in range(230):
-            soma+=B[i][j]*b[j]
-        R.append(soma)
-    return(R)
-
-def soma(A,B):
-    # A e B tem que ter mesma dimensão
-    C=[]
-    for i in range(len(A)):
-        linha=[]
-        for j in range(len(A[i])):
-            linha.append(A[i][j]+B[i][j])
-        C.append(linha)
-    return(C)
-
-def sub(a,b):
-    c=[]
-    for i in range(230):
-        c.append(a[i]-b[i])
-    return(c)
-
-def norma(a):
-    s=0
-    for i in range(len(a)):
-        s+=abs(a[i])
-    return(s)
-
-def multEscalar(a,e):
-    b=[]
-    for i in range(230):
-        linha=[]
-        for j in range(230):
-            linha.append(e*a[i][j])
-        b.append(linha)
-    return(b)
-
-
 m=0.15
 x0= 230*[1/230]
-S = 230*[230*[m/230]]
-M = soma( multEscalar(matriz_de_ligacao,(1-m)) , S )
-
-
-x=mult(M,x0)
+S = 230*[230*[1/230]]
+x=soma(multEscalar(  calcula_y(x0) ,1-m),multEscalar( mult(S,x0),m))
 x1=x0
 k=0 # contador
 while(norma(sub(x,x1))>10**(-5)):
     x1=x
-    x=mult(M,x1)
+    x=soma(multEscalar( calcula_y(x1) ,1-m),multEscalar( mult(S,x1),m))
     k+=1 # contador 
- # vetor classificação
+#print(x) # vetor classificação
 
 add=0
 for i in x:
     add+=i
-    if i<0: print('menor q zero')
-
 print(add)
-print(len(x))
 
+print(verifica(matriz_de_ligacao))
 
 
 
