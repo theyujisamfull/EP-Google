@@ -2,7 +2,7 @@
 
 
 matriz = []
-numeros_caciques = [] # quem  cacique
+numeros_caciques = [] # quem é cacique
 for i in range(1,21):
     grupo = i
     cacique = int((grupo*(grupo+1))/2 )
@@ -19,10 +19,10 @@ matriz_den = []
 for i in range(20):
     m_den=[]
     for j in range(len(matriz[i])):
-        if (j==0): # significa que cacique
+        if (j==0): # significa que é cacique
             den_cacique=len(matriz[i])-1+20-1 # 20 caciques
             m_den.append(1/den_cacique)
-        else: # significa que indio
+        else: # significa que é indio
             den_indio=len(matriz[i])-1
             m_den.append(1/den_indio)
     matriz_den.append(m_den)
@@ -41,12 +41,12 @@ def qual_grupo_e_pertence(e):
                    
                    
 
-#Declara matriz de lig 
+#Declara matriz de ligação
 matriz_de_ligacao=[]
 
 for e in range(1,231):
     #Cada elemento z da linha e da matriz_de_ligacao diferente de zero quer dizer que z aponta pra e
-    #Se i  cacique sabe-se que todos os outros caciques apontam pra i
+    #Se i é cacique sabe-se que todos os outros caciques apontam pra i
     x = 230*[0]
     if e in numeros_caciques: 
         grupo_que_e_pertence = qual_grupo_e_pertence(e)
@@ -82,11 +82,9 @@ for i in range(0,230):
 
 
 
-
-
-
-print(C)
-
+print(V,"\n")
+print(L,"\n")
+print(C,"\n")
 
 
 
