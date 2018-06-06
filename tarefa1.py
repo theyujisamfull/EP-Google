@@ -13,28 +13,16 @@ def mult(B,b):
     return(R)
 
 def soma(a,b):
-    c=[]
-    for i in range(8):
-        c.append(a[i]+b[i])
-    return(c)
+    return( [a[i]+b[i] for i in range(len(a))] )
 
 def sub(a,b):
-    c=[]
-    for i in range(8):
-        c.append(a[i]-b[i])
-    return(c)
+    return( [a[i]-b[i] for i in range(len(a))] )
 
 def norma(a):
-    s=0
-    for i in range(len(a)):
-        s+=abs(a[i])
-    return(s)
+    return( sum( [abs(x) for x in a] ) )
 
 def multEscalar(a,e):
-    b=[]
-    for i in range(8):
-        b.append(e*a[i])
-    return(b)
+    return( [e*x for x in a] )
 
 s = mult(S,x0)
 x=soma(multEscalar(mult(A,x0),1-m),multEscalar(s, m))
@@ -50,7 +38,4 @@ print("\n|{0:^9}|{1:^8}|{2:^17}|".format("Ranking","Página","Importância"))
 for pagina in enumerate(paginas_rankeadas):
     print("|{rank:^9}|{pag:^8}|{imp:^17.12}|".format(rank=pagina[0]+1, pag=pagina[1][0], imp=pagina[1][1]))
 
-p=0
-for i in x:
-   p+=i
-print("\nSoma das importâncias = {}".format(p))
+print("\nSoma das importâncias = {}".format(sum(x)))
