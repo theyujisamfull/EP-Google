@@ -1,30 +1,24 @@
+matriz_grupos = []
+paginas_cacique = [] # quem é cacique
+for grupo in range(1,21):
+    pagina_cacique = int((grupo*(grupo+1))/2)
+    paginas_cacique.append(pagina_cacique)
 
-
-
-
-matriz = []
-numeros_caciques = [] # quem é cacique
-for i in range(1,21):
-    grupo = i
-    cacique = int ((grupo*(grupo+1))/2 )
-    numeros_caciques.append(cacique)
-    numero_de_indios = grupo+1
-    matriz_do_grupo = []
-    for j in range(cacique,cacique+numero_de_indios):
-        matriz_do_grupo.append(j)
-        
-    matriz.append(matriz_do_grupo)
+    quantidade_paginas_indio = grupo
+    matriz_grupo = []
+    for pagina in range(pagina_cacique, pagina_cacique + quantidade_paginas_indio + 1):
+        matriz_grupo.append(pagina)
+    matriz_grupos.append(matriz_grupo)
 
 matriz_den = []
-
-for i in range(20):
+for i in range(0,20):
     m_den=[]
-    for j in range(len(matriz[i])):
+    for j in range(len(matriz_grupos[i])):
         if (j==0): # significa que é cacique
-            den_cacique=len(matriz[i])-1+20-1 # 20 caciques
+            den_cacique=len(matriz_grupos[i])-1+20-1 # 20 caciques
             m_den.append(1/den_cacique)
         else: # significa que é indio
-            den_indio=len(matriz[i])-1
+            den_indio=len(matriz_grupos[i])-1
             m_den.append(1/den_indio)
     matriz_den.append(m_den)
 
@@ -32,37 +26,36 @@ vetor_den=[]
 vetor_matriz=[]
 for i in range (0,20):
     for j in matriz_den[i]: vetor_den.append(j)
-    for k in matriz[i]: vetor_matriz.append(k) 
+    for k in matriz_grupos[i]: vetor_matriz.append(k)
 
+def encontrar_grupo(pagina):
+    for grupo in range(0,20):
+        if pagina in matriz_grupos[grupo]: return grupo
 
-
-def qual_grupo_e_pertence(e):
-    for i in range(0,20):
-        if e in matriz[i]: return i
-                   
-                   
-
-#Declara matriz de ligação 
+#Declara matriz de ligação
 matriz_de_ligacao=[]
-
-for e in range(1,231):
-    #Cada elemento z da linha e da matriz_de_ligacao diferente de zero quer dizer que z aponta pra e
-    #Se i é cacique sabe-se que todos os outros caciques apontam pra i
-    z = 230*[0]
-    if e in numeros_caciques: 
-        grupo_que_e_pertence = qual_grupo_e_pertence(e)
-        for j in matriz[grupo_que_e_pertence]:
-            if j != e:  z[j-1] = ( vetor_den[ j-1 ]  )
-    
-        for j in numeros_caciques:
-            if j != e:  z[j-1] = ( vetor_den[ j-1 ]  )
-        
-        matriz_de_ligacao.append(z)
+for pagina_chegada in range(1,231):
+    #Cada valor diferente de zero na linha_de_ligacao representa que
+    #a pagina_saida, de numero igual ao indice do elemento em questao,
+    #aponta para a pagina_chegada
+    #A linha um da matriz_de_ligacao representa as paginas que apontam
+    #para a pagina 1, a linha n representa as paginas que apontam para n
+    linha_de_ligacao = 230*[0]
+    if pagina_chegada in paginas_cacique:
+        grupo_da_pagina = encontrar_grupo(pagina_chegada)
+        for pagina_saida in matriz_grupos[grupo_da_pagina]:
+            if pagina_saida != pagina_chegada:
+                linha_de_ligacao[pagina_saida-1] = ( vetor_den[ pagina_saida-1 ]  )
+        for pagina_saida in paginas_cacique:
+            if pagina_saida != pagina_chegada:
+                linha_de_ligacao[pagina_saida-1] = ( vetor_den[ pagina_saida-1 ]  )
+        matriz_de_ligacao.append(linha_de_ligacao)
     else:
-        grupo_que_e_pertence = qual_grupo_e_pertence(e)
-        for j in matriz[grupo_que_e_pertence]:
-            if j != e:  z[j-1] = ( vetor_den[ j-1 ]  )
-        matriz_de_ligacao.append(z)
+        grupo_da_pagina = encontrar_grupo(pagina_chegada)
+        for pagina_saida in matriz_grupos[grupo_da_pagina]:
+            if pagina_saida != pagina_chegada:
+                linha_de_ligacao[pagina_saida-1] = ( vetor_den[ pagina_saida-1 ]  )
+        matriz_de_ligacao.append(linha_de_ligacao)
 
 def verifica(B):
     for i in range(0,229):
@@ -144,7 +137,7 @@ k=0 # contador
 while(norma(sub(x,x1))>10**(-5)):
     x1=x
     x=mult(M,x1)
-    k+=1 # contador 
+    k+=1 # contador
  # vetor classificação
 
 add=0
@@ -154,11 +147,3 @@ for i in x:
 
 print(add)
 print(len(x))
-
-
-
-
-
-
-
-
