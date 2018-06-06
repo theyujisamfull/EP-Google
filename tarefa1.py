@@ -42,12 +42,16 @@ k=0 # contador
 while(norma(sub(x,x1))>10**(-5)):
     x1=x
     x=soma(multEscalar(mult(A,x1),1-m),multEscalar( mult(S,x1),m))
-    k+=1 # contador 
-print(x) # vetor classificação
+    k+=1 # contador
+
+print("\nVetor de classificação:\n{}".format(x)) # vetor classificação
+
+paginas_rankeadas = sorted(enumerate(x), key = lambda item: item[1], reverse=True)
+print("\n|{0:^9}|{1:^8}|{2:^17}|".format("Ranking","Página","Importância"))
+for pagina in enumerate(paginas_rankeadas):
+    print("|{rank:^9}|{pag:^8}|{imp:^17.12}|".format(rank=pagina[0]+1, pag=pagina[1][0], imp=pagina[1][1]))
 
 p=0
 for i in x:
    p+=i
-print(p)
-
-    
+print("\nSoma das importâncias = {}".format(p))
