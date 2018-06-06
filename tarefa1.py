@@ -1,6 +1,6 @@
-A=[[0,0,0,0,0,0,0,0.5],[0.5,0,0,0,0,0,0,0],[0.5,0.5,0,0,0,0,0,0.5],[0,0.5,0,0,0,0,0,0],[0,0,0,0.5,0,0,0,0],[0,0,0.5,0.5,1,0,0,0],[0,0,0.5,0,0,1,0,0],[0,0,0,0,0,0,1,0]]
+A = [[0,0,0,0,0,0,0,0.5],[0.5,0,0,0,0,0,0,0],[0.5,0.5,0,0,0,0,0,0.5],[0,0.5,0,0,0,0,0,0],[0,0,0,0.5,0,0,0,0],[0,0,0.5,0.5,1,0,0,0],[0,0,0.5,0,0,1,0,0],[0,0,0,0,0,0,1,0]]
 S = 8*[8*[1/8]]
-m=0.15
+m = 0.15
 x0 = 8*[1/8]
 
 def mult(B,b):
@@ -25,11 +25,11 @@ def multEscalar(a,e):
     return( [e*x for x in a] )
 
 s = mult(S,x0)
-x=soma(multEscalar(mult(A,x0),1-m),multEscalar(s, m))
-x1=x0
-while(norma(sub(x,x1))>10**(-5)):
-    x1=x
-    x=soma(multEscalar(mult(A,x1),1-m),multEscalar(s, m))
+x = soma(multEscalar(mult(A,x0),1-m),multEscalar(s,m))
+x1 = x0
+while(norma(sub(x,x1)) > 10**(-5)):
+    x1 = x
+    x = soma(multEscalar(mult(A,x1),1-m),multEscalar(s,m))
 
 print("\nVetor de classificação:\n{}".format(x)) # vetor classificação
 
