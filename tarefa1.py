@@ -36,12 +36,13 @@ def multEscalar(a,e):
         b.append(e*a[i])
     return(b)
 
-x=soma(multEscalar(mult(A,x0),1-m),multEscalar( mult(S,x0),m))
+s = mult(S,x0)
+x=soma(multEscalar(mult(A,x0),1-m),multEscalar(s, m))
 x1=x0
 k=0 # contador
 while(norma(sub(x,x1))>10**(-5)):
     x1=x
-    x=soma(multEscalar(mult(A,x1),1-m),multEscalar( mult(S,x1),m))
+    x=soma(multEscalar(mult(A,x1),1-m),multEscalar(s, m))
     k+=1 # contador
 
 print("\nVetor de classificação:\n{}".format(x)) # vetor classificação
