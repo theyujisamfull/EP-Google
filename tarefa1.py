@@ -3,14 +3,9 @@ S = 8*[8*[1/8]]
 m = 0.15
 x0 = 8*[1/8]
 
-def mult(B,b):
-    R=[]
-    for i in range(8):
-        soma=0
-        for j in range(8):
-            soma+=B[i][j]*b[j]
-        R.append(soma)
-    return(R)
+def mult(A,b):
+    '''Multiplica uma matriz quadrada por um vetor'''
+    return( [sum( A[i][j]*b[j] for j in range(len(A)) ) for i in range(len(A))] )
 
 def soma(a,b):
     return( [a[i]+b[i] for i in range(len(a))] )
