@@ -13,15 +13,15 @@ for grupo in range(1,21):
 # Constrói um vetor com os pesos relativos de cada página, isto é, com o valor
 # que cada link saindo dessa página terá. Esse valor é igual 1 divido pelo
 # número de links que saem da página
-vetor_den=[]
-for i in range(0,20):
-    for j in range(len(matriz_grupos[i])):
-        if (j==0): # significa que é cacique
-            den_cacique = len(matriz_grupos[i])-1+20-1 # 20 caciques
-            vetor_den.append(1/den_cacique)
+pesos_links=[]
+for grupo in range(0,20):
+    for posicao_pagina in range(len(matriz_grupos[grupo])):
+        if (posicao_pagina==0): # significa que é cacique
+            quantidade_links = len(matriz_grupos[grupo])-1+20-1 # 20 caciques
+            pesos_links.append(1/quantidade_links)
         else: # significa que é indio
-            den_indio = len(matriz_grupos[i])-1
-            vetor_den.append(1/den_indio)
+            quantidade_links = len(matriz_grupos[grupo])-1
+            pesos_links.append(1/quantidade_links)
 
 
 def encontrar_grupo(pagina):
@@ -41,16 +41,16 @@ for pagina_chegada in range(1,231):
         grupo_da_pagina = encontrar_grupo(pagina_chegada)
         for pagina_saida in matriz_grupos[grupo_da_pagina]:
             if pagina_saida != pagina_chegada:
-                linha_de_ligacao[pagina_saida-1] = ( vetor_den[ pagina_saida-1 ]  )
+                linha_de_ligacao[pagina_saida-1] = ( pesos_links[ pagina_saida-1 ]  )
         for pagina_saida in paginas_cacique:
             if pagina_saida != pagina_chegada:
-                linha_de_ligacao[pagina_saida-1] = ( vetor_den[ pagina_saida-1 ]  )
+                linha_de_ligacao[pagina_saida-1] = ( pesos_links[ pagina_saida-1 ]  )
         matriz_de_ligacao.append(linha_de_ligacao)
     else:
         grupo_da_pagina = encontrar_grupo(pagina_chegada)
         for pagina_saida in matriz_grupos[grupo_da_pagina]:
             if pagina_saida != pagina_chegada:
-                linha_de_ligacao[pagina_saida-1] = ( vetor_den[ pagina_saida-1 ]  )
+                linha_de_ligacao[pagina_saida-1] = ( pesos_links[ pagina_saida-1 ]  )
         matriz_de_ligacao.append(linha_de_ligacao)
 
 def verifica(B):
