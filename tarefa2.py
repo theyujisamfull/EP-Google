@@ -10,22 +10,19 @@ for grupo in range(1,21):
         matriz_grupo.append(pagina)
     matriz_grupos.append(matriz_grupo)
 
-# Constrói a matriz com os pesos relativos de cada página
-matriz_den = []
+# Constrói um vetor com os pesos relativos de cada página, isto é, com o valor
+# que cada link saindo dessa página terá. Esse valor é igual 1 divido pelo
+# número de links que saem da página
+vetor_den=[]
 for i in range(0,20):
-    m_den=[]
     for j in range(len(matriz_grupos[i])):
         if (j==0): # significa que é cacique
             den_cacique = len(matriz_grupos[i])-1+20-1 # 20 caciques
-            m_den.append(1/den_cacique)
+            vetor_den.append(1/den_cacique)
         else: # significa que é indio
             den_indio = len(matriz_grupos[i])-1
-            m_den.append(1/den_indio)
-    matriz_den.append(m_den)
+            vetor_den.append(1/den_indio)
 
-vetor_den=[]
-for i in range (0,20):
-    for j in matriz_den[i]: vetor_den.append(j)
 
 def encontrar_grupo(pagina):
     for grupo in range(0,20):
