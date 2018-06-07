@@ -80,9 +80,9 @@ def calcula_y(xi):
 
     return y
 
-def mult(B,b):
+def mult(A,b):
     '''Multiplica uma matriz quadrada por um vetor'''
-    return( [sum( A[i][j]*c[j] for j in range(len(A)) ) for i in range(len(A))] )
+    return( [sum( A[i][j]*b[j] for j in range(len(A)) ) for i in range(len(A))] )
 
 def soma(A,B):
     '''Soma duas matrizes quadradas de mesmo tamanho'''
