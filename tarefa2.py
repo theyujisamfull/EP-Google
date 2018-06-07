@@ -81,45 +81,24 @@ def calcula_y(xi):
     return y
 
 def mult(B,b):
-    R=[]
-    for i in range(230):
-        soma=0
-        for j in range(230):
-            soma+=B[i][j]*b[j]
-        R.append(soma)
-    return(R)
+    '''Multiplica uma matriz quadrada por um vetor'''
+    return( [sum( A[i][j]*c[j] for j in range(len(A)) ) for i in range(len(A))] )
 
 def soma(A,B):
-    # A e B tem que ter mesma dimensão
-    C=[]
-    for i in range(len(A)):
-        linha=[]
-        for j in range(len(A[i])):
-            linha.append(A[i][j]+B[i][j])
-        C.append(linha)
-    return(C)
+    '''Soma duas matrizes quadradas de mesmo tamanho'''
+    return( [[A[i][j] + B[i][j] for j in range(len(A))] for i in range(len(A))] )
 
 def sub(a,b):
-    c=[]
-    for i in range(230):
-        c.append(a[i]-b[i])
-    return(c)
+    '''Subtrai dois vetores de mesmo tamanho'''
+    return( [a[i]-b[i] for i in range(len(a))] )
 
 def norma(a):
-    s=0
-    for i in range(len(a)):
-        s+=abs(a[i])
-    return(s)
+    '''Calcula a norma de primeira ordem de um vetor'''
+    return( sum( [abs(x) for x in a] ) )
 
-def multEscalar(a,e):
-    b=[]
-    for i in range(230):
-        linha=[]
-        for j in range(230):
-            linha.append(e*a[i][j])
-        b.append(linha)
-    return(b)
-
+def multEscalar(A,e):
+    '''Multiplica uma matriz quadrada por um número'''
+    return( [[e*A[i][j] for j in range(len(A))] for i in range(len(A))] )
 
 m=0.15
 x0= 230*[1/230]
