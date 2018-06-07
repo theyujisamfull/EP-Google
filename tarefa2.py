@@ -10,23 +10,22 @@ for grupo in range(1,21):
         matriz_grupo.append(pagina)
     matriz_grupos.append(matriz_grupo)
 
+# Constrói a matriz com os pesos relativos de cada página
 matriz_den = []
 for i in range(0,20):
     m_den=[]
     for j in range(len(matriz_grupos[i])):
         if (j==0): # significa que é cacique
-            den_cacique=len(matriz_grupos[i])-1+20-1 # 20 caciques
+            den_cacique = len(matriz_grupos[i])-1+20-1 # 20 caciques
             m_den.append(1/den_cacique)
         else: # significa que é indio
-            den_indio=len(matriz_grupos[i])-1
+            den_indio = len(matriz_grupos[i])-1
             m_den.append(1/den_indio)
     matriz_den.append(m_den)
 
 vetor_den=[]
-vetor_matriz=[]
 for i in range (0,20):
     for j in matriz_den[i]: vetor_den.append(j)
-    for k in matriz_grupos[i]: vetor_matriz.append(k)
 
 def encontrar_grupo(pagina):
     for grupo in range(0,20):
