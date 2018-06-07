@@ -1,7 +1,7 @@
 matriz_grupos = []
 paginas_cacique = [] # quem é cacique
 for grupo in range(1,21):
-    pagina_cacique = int((grupo*(grupo+1))/2)
+    pagina_cacique = int((grupo * (grupo + 1)) / 2)
     paginas_cacique.append(pagina_cacique)
 
     quantidade_paginas_indio = grupo
@@ -16,17 +16,17 @@ for grupo in range(1,21):
 pesos_links=[]
 for grupo in range(0,20):
     for posicao_pagina in range(len(matriz_grupos[grupo])):
-        if (posicao_pagina==0): # significa que é cacique
-            quantidade_links = len(matriz_grupos[grupo])-1+20-1 # 20 caciques
-            pesos_links.append(1/quantidade_links)
+        if posicao_pagina == 0: # significa que é cacique
+            quantidade_links = len(matriz_grupos[grupo]) - 1 + 20 - 1 # 20 caciques
+            pesos_links.append(1 / quantidade_links)
         else: # significa que é indio
-            quantidade_links = len(matriz_grupos[grupo])-1
-            pesos_links.append(1/quantidade_links)
-
+            quantidade_links = len(matriz_grupos[grupo]) - 1
+            pesos_links.append(1 / quantidade_links)
 
 def encontrar_grupo(pagina):
     for grupo in range(0,20):
-        if pagina in matriz_grupos[grupo]: return grupo
+        if pagina in matriz_grupos[grupo]:
+            return grupo
 
 #Declara matriz de ligação
 matriz_de_ligacao=[]
@@ -41,16 +41,16 @@ for pagina_chegada in range(1,231):
         grupo_da_pagina = encontrar_grupo(pagina_chegada)
         for pagina_saida in matriz_grupos[grupo_da_pagina]:
             if pagina_saida != pagina_chegada:
-                linha_de_ligacao[pagina_saida-1] = ( pesos_links[ pagina_saida-1 ]  )
+                linha_de_ligacao[pagina_saida - 1] = pesos_links[pagina_saida - 1]
         for pagina_saida in paginas_cacique:
             if pagina_saida != pagina_chegada:
-                linha_de_ligacao[pagina_saida-1] = ( pesos_links[ pagina_saida-1 ]  )
+                linha_de_ligacao[pagina_saida - 1] = pesos_links[pagina_saida - 1]
         matriz_de_ligacao.append(linha_de_ligacao)
     else:
         grupo_da_pagina = encontrar_grupo(pagina_chegada)
         for pagina_saida in matriz_grupos[grupo_da_pagina]:
             if pagina_saida != pagina_chegada:
-                linha_de_ligacao[pagina_saida-1] = ( pesos_links[ pagina_saida-1 ]  )
+                linha_de_ligacao[pagina_saida - 1] = pesos_links[pagina_saida - 1]
         matriz_de_ligacao.append(linha_de_ligacao)
 
 def verifica(B):
