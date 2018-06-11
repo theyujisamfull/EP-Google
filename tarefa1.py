@@ -1,5 +1,5 @@
 def mult(A,b):
-    '''Multiplica uma matriz quadrada por um vetor'''
+    '''Multiplica uma matriz quadrada nxn por um vetor de tamanho n'''
     return( [sum( A[i][j]*b[j] for j in range(len(A)) ) for i in range(len(A))] )
 
 def soma(a,b):
