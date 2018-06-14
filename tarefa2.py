@@ -166,15 +166,19 @@ def main():
     '''
     não estamos utilizando V,L e C para calcular a resposta
     logo, aqui vai sugestão de uso
-    y=230*[0]
-    for s in range(0,3459):
-        y[L[s]]=y[L[s]]+V[s]*x[C[s]]
     '''
 
 
     x=mult(M,x0)
     x1=x0
+    #y=calcula_y(x0)
     k=0 # contador
+    '''
+    while(norma(sub(y,x1))>10**(-5)):
+        x1=y
+        y=calcula_y(x1)
+        k+=1
+    '''
     while(norma(sub(x,x1))>10**(-5)):
         x1=x
         x=mult(M,x1)
