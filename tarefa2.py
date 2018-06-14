@@ -134,6 +134,7 @@ def gerar_vetores_V_L_C(matriz_de_ligacao):
     return (V,L,C)
 
 def verifica(B):
+    ''' recebe uma matriz e verifica se a soma das colunas é 1'''
     for i in range(0,229):
         s=0
         for j in range(0,229):
@@ -161,6 +162,14 @@ def main():
     x0 = 230*[1/230]
     S = 230*[230*[m/230]]
     M = soma( multEscalar(matriz_de_ligacao,(1-m)) , S )
+    
+    '''
+    não estamos utilizando V,L e C para calcular a resposta
+    logo, aqui vai sugestão de uso
+    y=230*[0]
+    for s in range(0,3459):
+        y[L[s]]=y[L[s]]+V[s]*x[C[s]]
+    '''
 
 
     x=mult(M,x0)
