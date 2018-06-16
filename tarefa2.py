@@ -144,9 +144,9 @@ def verifica(B):
               return(False)
     return(True)
 
-def calcula_y(xi):
+def calcula_y(xi,V,L,C):
     y=230*[0]
-    for s in range(0,3459):
+    for s in range(0,3460):
         y[L[s]]=y[L[s]]+V[s]*xi[C[s]]
 
     return y
@@ -158,39 +158,26 @@ def main():
     matriz_de_ligacao = gerar_matriz_de_ligacao(matriz_grupos,paginas_cacique,pesos_links)
     (V,L,C) = gerar_vetores_V_L_C(matriz_de_ligacao)
 
-    m = 0.15
+
     x0 = 230*[1/230]
-    S = 230*[230*[m/230]]
-    M = soma( multEscalar(matriz_de_ligacao,(1-m)) , S )
-    
-    '''
-    não estamos utilizando V,L e C para calcular a resposta
-    logo, aqui vai sugestão de uso
-    '''
 
+    y=calcula_y(x0,V,L,C)
 
-    x=mult(M,x0)
     x1=x0
-    #y=calcula_y(x0)
-    k=0 # contador
-    '''
     while(norma(sub(y,x1))>10**(-5)):
         x1=y
-        y=calcula_y(x1)
-        k+=1
-    '''
-    while(norma(sub(x,x1))>10**(-5)):
-        x1=x
-        x=mult(M,x1)
-        k+=1 # contador
-     # vetor classificação
+        y=calcula_y(x1,V,L,C)
+        
+
+
+
 
     add=0
-    for i in x:
+    for i in y:
         add+=i
         if i<0: print('menor q zero')
 
     print(add)
-    print(len(x))
+    print(len(y))
 
 main()
