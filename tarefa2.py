@@ -22,24 +22,30 @@ def multEscalar(A,e):
 
 # Define funçoes específicas do exercicio
 def gerar_matriz_grupos_e_paginas_cacique():
-    #Declara matriz_grupos
+    '''Não recebe parâmetro e retorna uma lista de listas, e uma lista de numeros.
+
+    matriz_grupos é uma lista de listas na forma
+    [[1,2],[3,4,5],[6,7,8,9],...,[210,211,...,230]]
+    Cada uma das listas internas representa um grupo de paginas,
+    e o valor de seus elementos identificam as páginas.
+    A primeira página de cada grupo é sempre um cacique, isto é, as
+    páginas 1,3,6,...,210 são caciques.
+
+    paginas_cacique é uma lista na forma
+    [1,3,6,10,...,210]
+    Cada um desses valores representa uma página cacique
+    '''
     matriz_grupos = []
-    #Declara lista que guarda as páginas que são caciques
     paginas_cacique = []
-    #Gera a matriz que representa a rede cacique tribo com 20 páginas, ou seja,
-    #[[1,2],[3,4,5],[6,7,8,9],...,[210,211,...,230]] 
-    for i in range(1,21):
-        #Determina a página cacique do grupo i
-        cacique = int((i * (i + 1)) / 2)
-        #Armazena os caciques no vetor paginas_cacique
+    for grupo in range(1,21):
+        pagina_cacique = int((grupo * (grupo + 1)) / 2)
         paginas_cacique.append(pagina_cacique)
-        #O grupo i tem i páginas não caciques (indios)
-        quantidade_paginas_indio = i
-        #matriz_grupo guarda as páginas do grupo i
-        grupo = []
-        for pagina in range(cacique, pagina_cacique + quantidade_paginas_indio + 1):
-            grupo.append(pagina)
-        matriz_grupos.append(grupo)
+
+        quantidade_paginas_indio = grupo
+        matriz_grupo = []
+        for pagina in range(pagina_cacique, pagina_cacique + quantidade_paginas_indio + 1):
+            matriz_grupo.append(pagina)
+        matriz_grupos.append(matriz_grupo)
     return (matriz_grupos,paginas_cacique)
 
 def gerar_pesos_links(matriz_grupos):
