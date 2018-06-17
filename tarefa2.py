@@ -6,7 +6,8 @@ def mult(A,b):
 
 def soma(A,B):
     '''Soma duas matrizes quadradas de mesmo tamanho'''
-    return( [[A[i][j] + B[i][j] for j in range(len(A))] for i in range(len(A))] )
+    #return( [[A[i][j] + B[i][j] for j in range(len(A))] for i in range(len(A))] )
+    return( [A[j] + B[j] for j in range(len(A))] )
 
 def sub(a,b):
     '''Subtrai dois vetores de mesmo tamanho'''
@@ -18,7 +19,8 @@ def norma(a):
 
 def multEscalar(A,e):
     '''Multiplica uma matriz quadrada por um número'''
-    return( [[e*A[i][j] for j in range(len(A))] for i in range(len(A))] )
+    #return( [[e*A[i][j] for j in range(len(A))] for i in range(len(A))] )
+    return( [e*A[j] for j in range(len(A))] )
 
 # Define funçoes específicas do exercicio
 def gerar_matriz_grupos_e_paginas_cacique():
@@ -98,10 +100,11 @@ def gerar_matriz_de_ligacao(matriz_grupos, paginas_cacique, pesos_links):
     L=[]
     C=[]
     for pagina_chegada in range(1,231):
-        #Cada valor diferente de zero na linha_de_ligacao representa que
-        #a pagina_saida, de numero igual ao indice do elemento em questao,
-        #aponta para a pagina_chegada
-        
+        '''
+        Cada valor diferente de zero na linha_de_ligacao representa que
+        a pagina_saida, de numero igual ao indice do elemento em questao,
+        aponta para a pagina_chegada
+        '''
         if pagina_chegada in paginas_cacique:
             grupo_da_pagina = encontrar_grupo(matriz_grupos, pagina_chegada)
             p= paginas_cacique+matriz_grupos[grupo_da_pagina]
@@ -167,23 +170,22 @@ def main():
 
 
     x0 = 230*[1/230]
-
     y=calcula_y(x0,V,L,C)
 
     k=0
     x1=x0
 
     m = 0.15
-    S = 230*[230*[1/230]]
-    constante = multEscalar(mult(S,x0),m)
+    #S = 230*[230*[1/230]]
+    #constante = multEscalar(mult(S,x0),m)
 
-    x2 = soma(multEscalar(y,1-m),constante)
+    x2 = soma(multEscalar(y,1-m),multEscalar(x0,m))
     
     while(norma(sub(x2,x1))>10**(-5)):
         k=k+1
         x1=x2
         y=calcula_y(x1,V,L,C)
-        x2 = soma(multEscalar(y,1-m),constante)
+        x2 = soma(multEscalar(y,1-m),multEscalar(x0,m))
 
 
 
