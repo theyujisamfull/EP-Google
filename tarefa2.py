@@ -124,35 +124,9 @@ def gerar_matriz_de_ligacao(matriz_grupos, paginas_cacique, pesos_links):
                     C.append(pagina_saida - 1)
     return (V,L,C)
 
-def gerar_vetores_V_L_C(matriz_de_ligacao):
-    '''Recebe uma matriz e retorna três vetores de numeros.
-    A matriz de ligação é esparsa, isto é, tem muitas entradas 0.
-    Para economizar mémoria e cálulos cria-se os vetores V, L, e C.
-    Para cada elemento não nulo de matriz_de_ligacao, coloca-se o valor do
-    elemento no vetor V, a linha em que o elemento está no vetor L, e a coluna
-    no vetor C.
-    '''
-    V=[]
-    L=[]
-    C=[]
-    for i in range(0,230):
-        for j in range(0,230):
-            if matriz_de_ligacao[i][j] != 0:
-                V.append( matriz_de_ligacao[i][j] )
-                L.append(i)
-                C.append(j)
-    return (V,L,C)
 
-def verifica(B):
-    ''' recebe uma matriz e verifica se a soma das colunas é 1'''
-    for i in range(0,229):
-        s=0
-        for j in range(0,229):
-            s+=B[j][i]
-        if round(s) != 1 :
-              print(s)
-              return(False)
-    return(True)
+
+
 
 def calcula_y(xi,V,L,C):
     y=230*[0]
@@ -176,9 +150,6 @@ def main():
     x1=x0
 
     m = 0.15
-    #S = 230*[230*[1/230]]
-    #constante = multEscalar(mult(S,x0),m)
-
     x2 = soma(multEscalar(y,1-m),multEscalar(x0,m))
     
     while(norma(sub(x2,x1))>10**(-5)):
@@ -197,7 +168,7 @@ def main():
 
     print(add)
     print(k)
-    print(len(y))
+    print(x2)
 
     
 
