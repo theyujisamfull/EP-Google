@@ -172,11 +172,18 @@ def main():
 
     k=0
     x1=x0
-    while(norma(sub(y,x1))>10**(-5)):
+
+    m = 0.15
+    S = 230*[230*[1/230]]
+    constante = multEscalar(mult(S,x0),m)
+
+    x2 = soma(multEscalar(y,1-m),constante)
+    
+    while(norma(sub(x2,x1))>10**(-5)):
         k=k+1
-        x1=y
+        x1=x2
         y=calcula_y(x1,V,L,C)
-        
+        x2 = soma(multEscalar(y,1-m),constante)
 
 
 
