@@ -80,44 +80,8 @@ def encontrar_grupo(matriz_grupos, pagina):
         if pagina in matriz_grupos[grupo]:
             return grupo
 
+
 def gerar_matriz_de_ligacao(matriz_grupos, paginas_cacique, pesos_links):
-    '''Recebe uma lista de listas e duas listas de números, e retorna
-    uma matriz quadrada.
-
-    matriz_de_ligacao é uma matriz 230x230 que representa os links da rede
-    e seus valores relativos de importância. A linha 1 da matriz representa
-    todos os links que chegam à pagina 1, o elemento da linha 1 coluna 3 tem
-    valor 1/21, o que significa que a página 3 aponta para a página 1, e
-    esse link contribui para a importância da pagina 1 por (1/21*100)% da
-    importancia da pagina 3.
-
-    Nota-se que em python os indíces começam em 0, portanto o elemento da
-    linha 1 coluna 1 da matriz é dado por matriz_de_ligacao[0][0]
-    '''
-    matriz_de_ligacao=[]
-    for pagina_chegada in range(1,231):
-        #Cada valor diferente de zero na linha_de_ligacao representa que
-        #a pagina_saida, de numero igual ao indice do elemento em questao,
-        #aponta para a pagina_chegada
-        linha_de_ligacao = 230*[0]
-        if pagina_chegada in paginas_cacique:
-            grupo_da_pagina = encontrar_grupo(matriz_grupos, pagina_chegada)
-            for pagina_saida in matriz_grupos[grupo_da_pagina]:
-                if pagina_saida != pagina_chegada:
-                    linha_de_ligacao[pagina_saida - 1] = pesos_links[pagina_saida - 1]
-            for pagina_saida in paginas_cacique:
-                if pagina_saida != pagina_chegada:
-                    linha_de_ligacao[pagina_saida - 1] = pesos_links[pagina_saida - 1]
-            matriz_de_ligacao.append(linha_de_ligacao)
-        else:
-            grupo_da_pagina = encontrar_grupo(matriz_grupos, pagina_chegada)
-            for pagina_saida in matriz_grupos[grupo_da_pagina]:
-                if pagina_saida != pagina_chegada:
-                    linha_de_ligacao[pagina_saida - 1] = pesos_links[pagina_saida - 1]
-            matriz_de_ligacao.append(linha_de_ligacao)
-    return matriz_de_ligacao
-
-def gerar_matriz_de_ligacao2(matriz_grupos, paginas_cacique, pesos_links):
     '''Recebe uma lista de listas e duas listas de números, e retorna
     uma matriz quadrada.
     matriz_de_ligacao é uma matriz 230x230 que representa os links da rede
@@ -137,27 +101,24 @@ def gerar_matriz_de_ligacao2(matriz_grupos, paginas_cacique, pesos_links):
         #Cada valor diferente de zero na linha_de_ligacao representa que
         #a pagina_saida, de numero igual ao indice do elemento em questao,
         #aponta para a pagina_chegada
-        linha_de_ligacao = 230*[0]
+        
         if pagina_chegada in paginas_cacique:
             grupo_da_pagina = encontrar_grupo(matriz_grupos, pagina_chegada)
             p= paginas_cacique+matriz_grupos[grupo_da_pagina]
             p.sort()
             for pagina_saida in p:
                 if pagina_saida != pagina_chegada:
-                    linha_de_ligacao[pagina_saida - 1] = pesos_links[pagina_saida - 1]
                     V.append(pesos_links[pagina_saida - 1])
-                    #L.append(pagina_chegada - 1)
-                    #C.append(pagina_saida - 1)
+                    L.append(pagina_chegada - 1)
+                    C.append(pagina_saida - 1)
 
         else:
             grupo_da_pagina = encontrar_grupo(matriz_grupos, pagina_chegada)
             for pagina_saida in matriz_grupos[grupo_da_pagina]:
                 if pagina_saida != pagina_chegada:
-                    linha_de_ligacao[pagina_saida - 1] = pesos_links[pagina_saida - 1]
                     V.append(pesos_links[pagina_saida - 1])
                     L.append(pagina_chegada - 1)
                     C.append(pagina_saida - 1)
-            matriz_de_ligacao.append(linha_de_ligacao)
     return (V,L,C)
 
 def gerar_vetores_V_L_C(matriz_de_ligacao):
@@ -201,21 +162,10 @@ def calcula_y(xi,V,L,C):
 def main():
     (matriz_grupos, paginas_cacique) = gerar_matriz_grupos_e_paginas_cacique()
     pesos_links = gerar_pesos_links(matriz_grupos)
+    (V,L,C) = gerar_matriz_de_ligacao(matriz_grupos,paginas_cacique,pesos_links)
+        
 
-    matriz_de_ligacao = gerar_matriz_de_ligacao(matriz_grupos,paginas_cacique,pesos_links)
-    (V,L,C) = gerar_matriz_de_ligacao2(matriz_grupos,paginas_cacique,pesos_links)
-    (V3,L3,C3) = gerar_vetores_V_L_C(matriz_de_ligacao)
 
-    
-
-    count=0
-    for i in range(3460):
-        if V[i]!=V3[i]:
-            count= count+1
-            print(V[i],V3[i])
-    print(count)
-    
-'''
     x0 = 230*[1/230]
 
     y=calcula_y(x0,V,L,C)
@@ -240,7 +190,7 @@ def main():
     print(k)
     print(len(y))
 
-    '''
+    
 
 main()
 
