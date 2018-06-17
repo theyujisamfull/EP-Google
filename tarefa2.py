@@ -163,8 +163,10 @@ def main():
 
     y=calcula_y(x0,V,L,C)
 
+    k=0
     x1=x0
     while(norma(sub(y,x1))>10**(-5)):
+        k=k+1
         x1=y
         y=calcula_y(x1,V,L,C)
         
@@ -178,6 +180,7 @@ def main():
         if i<0: print('menor q zero')
 
     print(add)
-    print(len(y))
+    print(k)
+    print(y)
 
 main()
