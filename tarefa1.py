@@ -67,11 +67,8 @@ def main():
 
     print("\n|{0:^9}|{1:^8}|{2:^17}|".format("Ranking","Página","Importância"))
     for pagina in enumerate(paginas_rankeadas):
-        print("|{rank:^9}|{pag:^8}|{imp:^17.12}|".format(rank=pagina[0]+1, pag=pagina[1][0], imp=pagina[1][1]))
+        print("|{rank:^9}|{pag:^8}|{imp:^17.12}|".format(rank=pagina[0]+1, pag=pagina[1][0]+1, imp=pagina[1][1]))
 
     print("\nSoma das importâncias = {}".format(sum(x_l2)))
 
 main()
-
-
-
