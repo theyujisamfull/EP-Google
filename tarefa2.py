@@ -152,7 +152,6 @@ def main():
 
     # Cria uma lista de tuplas na forma [(pagina,importancia)]
     paginas_rankeadas = list(enumerate(x2))
-    print(paginas_rankeadas)
 
     # Cria uma lista na forma [(pagina,importancia)] somente com o cacique e a
     # primeira página indio de cada grupo
