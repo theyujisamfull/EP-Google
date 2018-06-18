@@ -139,8 +139,14 @@ def calcular_y(xi,V,L,C):
 
 
 def main():
+    #Matriz_grupos é a matriz que contém vetores que representam cada um dos
+    #20 grupos, ou seja, cada um desses vetores possuem as páginas do grupo.
     (matriz_grupos, paginas_cacique) = gerar_matriz_grupos_e_paginas_cacique()
+    #pesos_links é vetor que carrega os pesos (1/numero de paginas que saem
+    #da pagina) de cada uma das 230 paginas.
     pesos_links = gerar_pesos_links(matriz_grupos)
+    #Gera os vetores V=vetores não nulos da matriz de ligação,L,C são os indices
+    # da linha e coluna de cada um desses elementos não nulos.
     (V,L,C) = gerar_matriz_de_ligacao(matriz_grupos,paginas_cacique,pesos_links)
 
     x0 = 230*[1/230]
