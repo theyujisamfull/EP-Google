@@ -83,47 +83,52 @@ def encontrar_grupo(matriz_grupos, pagina):
             return grupo
 
 
+
 def gerar_matriz_de_ligacao(matriz_grupos, paginas_cacique, pesos_links):
-    '''Recebe uma lista de listas e duas listas de números, e retorna
-    uma matriz quadrada.
-    matriz_de_ligacao é uma matriz 230x230 que representa os links da rede
-    e seus valores relativos de importância. A linha 1 da matriz representa
-    todos os links que chegam à pagina 1, o elemento da linha 1 coluna 3 tem
-    valor 1/21, o que significa que a página 3 aponta para a página 1, e
-    esse link contribui para a importância da pagina 1 por (1/21*100)% da
-    importancia da pagina 3.
-    Nota-se que em python os indíces começam em 0, portanto o elemento da
-    linha 1 coluna 1 da matriz é dado por matriz_de_ligacao[0][0]
-    '''
     matriz_de_ligacao=[]
     V=[]
     L=[]
     C=[]
+    # Cada uma das 230 pagina_chegada representam cada uma das linhas da matriz
+    # de ligação 
     for pagina_chegada in range(1,231):
-        '''
-        Cada valor diferente de zero na linha_de_ligacao representa que
-        a pagina_saida, de numero igual ao indice do elemento em questao,
-        aponta para a pagina_chegada
-        '''
+        #Verifica se a pagina_chegada é cacique
         if pagina_chegada in paginas_cacique:
+            #Encontra a qual grupo tal pagina_chegada pertence
             grupo_da_pagina = encontrar_grupo(matriz_grupos, pagina_chegada)
+            #A pagina_chegada é apontada pelos elementos do seu grupo e por
+            #os outros caciques. Ordena-se as paginas que apontam para pagina_chegada
             p= paginas_cacique+matriz_grupos[grupo_da_pagina]
             p.sort()
+            #pagina_saida são todas as paginas que apontam para pagina_chegada
             for pagina_saida in p:
+                #Adiciona os pesos (1/numero de paginas que saem) das paginas
+                #que apontam pra pagina_chegada na matriz V.
+                #E pra cada um desses pesos adiciona-se nas matrizes L e C
+                #a linha e a coluna em que se encontram na matriz de ligação
+                #obs: o pagina_chegada nao aponta pra ela mesma por isso verifica
+                #se pagina_saida é diferente da pagina_chegada
                 if pagina_saida != pagina_chegada:
                     V.append(pesos_links[pagina_saida - 1])
                     L.append(pagina_chegada - 1)
                     C.append(pagina_saida - 1)
-
+        #A pagina_chegada é indio
         else:
+            #Encontra a qual grupo tal pagina_chegada pertence
             grupo_da_pagina = encontrar_grupo(matriz_grupos, pagina_chegada)
+            #pagina_saida são todas as paginas que apontam para pagina_chegada
             for pagina_saida in matriz_grupos[grupo_da_pagina]:
+                #Adiciona os pesos (1/numero de paginas que saem) das paginas
+                #que apontam pra pagina_chegada na matriz V.
+                #E pra cada um desses pesos adiciona-se nas matrizes L e C
+                #a linha e a coluna em que se encontram na matriz de ligação
+                #obs: o pagina_chegada nao aponta pra ela mesma por isso verifica
+                #se pagina_saida é diferente da pagina_chegada
                 if pagina_saida != pagina_chegada:
                     V.append(pesos_links[pagina_saida - 1])
                     L.append(pagina_chegada - 1)
                     C.append(pagina_saida - 1)
     return (V,L,C)
-
 
 
 
