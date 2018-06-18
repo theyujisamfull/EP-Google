@@ -6,7 +6,6 @@ def mult(A,b):
 
 def soma(A,B):
     '''Soma duas matrizes quadradas de mesmo tamanho'''
-    #return( [[A[i][j] + B[i][j] for j in range(len(A))] for i in range(len(A))] )
     return( [A[j] + B[j] for j in range(len(A))] )
 
 def sub(a,b):
@@ -19,7 +18,6 @@ def norma(a):
 
 def multEscalar(A,e):
     '''Multiplica uma matriz quadrada por um número'''
-    #return( [[e*A[i][j] for j in range(len(A))] for i in range(len(A))] )
     return( [e*A[j] for j in range(len(A))] )
 
 # Define funçoes específicas do exercicio
@@ -126,6 +124,13 @@ def gerar_matriz_de_ligacao(matriz_grupos, paginas_cacique, pesos_links):
     return (V,L,C)
 
 def calcular_y(xi,V,L,C):
+    '''Recebe quatro listas e retorna uma lista.
+    Dado um vetor xi que representa os valores das importancias das paginas em
+    uma certa iteração, utiliza os vetores V, L, e C, para calcular a próxima
+    iteração do vetor xi de importancias. O vetor V guarda os valores não nulos
+    da matriz de ligação, e os vetores L e C guardam suas posições da linha e coluna
+    na matriz de ligação.
+    '''
     y=230*[0]
     for s in range(0,3460):
         y[L[s]]=y[L[s]]+V[s]*xi[C[s]]
