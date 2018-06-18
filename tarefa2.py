@@ -20,7 +20,7 @@ def multEscalar(A,e):
     '''Multiplica uma matriz quadrada por um número'''
     return( [e*A[j] for j in range(len(A))] )
 
-# Define funçoes específicas do exercicio
+
 def gerar_matriz_grupos_e_paginas_cacique():
     '''Não recebe parâmetro e retorna uma lista de listas, e uma lista de numeros.
 
