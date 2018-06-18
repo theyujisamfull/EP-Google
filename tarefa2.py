@@ -140,7 +140,7 @@ def main():
     (matriz_grupos, paginas_cacique) = gerar_matriz_grupos_e_paginas_cacique()
     pesos_links = gerar_pesos_links(matriz_grupos)
     (V,L,C) = gerar_matriz_de_ligacao(matriz_grupos,paginas_cacique,pesos_links)
-        
+
 
 
     x0 = 230*[1/230]
@@ -151,29 +151,40 @@ def main():
 
     m = 0.15
     x2 = soma(multEscalar(y,1-m),multEscalar(x0,m))
-    
+
     while(norma(sub(x2,x1))>10**(-5)):
         k=k+1
         x1=x2
         y=calcula_y(x1,V,L,C)
         x2 = soma(multEscalar(y,1-m),multEscalar(x0,m))
 
-
-
-
     add=0
     for i in y:
         add+=i
         if i<0: print('menor q zero')
 
+    paginas_rankeadas = list(enumerate(x2))
+    paginas_rankeadas_sem_repeticao = []
+
+    for pagina_cacique in paginas_cacique:
+        paginas_rankeadas_sem_repeticao.append(paginas_rankeadas[pagina_cacique-1])
+        paginas_rankeadas_sem_repeticao.append(paginas_rankeadas[pagina_cacique])
+
+    paginas_rankeadas_sem_repeticao = sorted(paginas_rankeadas_sem_repeticao,
+                                            key = lambda item: item[1],
+                                            reverse=True)
+
+    for pagina in enumerate(paginas_rankeadas_sem_repeticao):
+        print(pagina)
+    print("\n|{0:^9}|{1:^8}|{2:^10}|{3:^19}|".format("Ranking","Página","Cacique?","Importância"))
+    for pagina in enumerate(paginas_rankeadas_sem_repeticao):
+        print("|{rank:^9}|{pag:^8}|{cacique:^10}|{imp:^19.12}|".format(
+                                                                    rank=pagina[0]+1,
+                                                                    pag=pagina[1][0]+1,
+                                                                    cacique= "Sim" if pagina[1][0]+1 in paginas_cacique else "Não",
+                                                                    imp=pagina[1][1]))
+
     print(add)
     print(k)
-    print(x2)
-
-    
 
 main()
-
-
-    
-
