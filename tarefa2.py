@@ -50,9 +50,6 @@ def gerar_matriz_grupos_e_paginas_cacique():
         matriz_grupos.append(matriz_grupo)
     return (matriz_grupos,paginas_cacique)
 
-
-
-
 def gerar_pesos_links(matriz_grupos):
     '''Recebe uma lista de listas, e retorna uma lista de números.
 
@@ -82,15 +79,13 @@ def encontrar_grupo(matriz_grupos, pagina):
         if pagina in matriz_grupos[grupo]:
             return grupo
 
-
-
 def gerar_matriz_de_ligacao(matriz_grupos, paginas_cacique, pesos_links):
     matriz_de_ligacao=[]
     V=[]
     L=[]
     C=[]
     # Cada uma das 230 pagina_chegada representam cada uma das linhas da matriz
-    # de ligação 
+    # de ligação
     for pagina_chegada in range(1,231):
         #Verifica se a pagina_chegada é cacique
         if pagina_chegada in paginas_cacique:
@@ -130,10 +125,7 @@ def gerar_matriz_de_ligacao(matriz_grupos, paginas_cacique, pesos_links):
                     C.append(pagina_saida - 1)
     return (V,L,C)
 
-
-
-
-def calcula_y(xi,V,L,C):
+def calcular_y(xi,V,L,C):
     y=230*[0]
     for s in range(0,3460):
         y[L[s]]=y[L[s]]+V[s]*xi[C[s]]
@@ -146,41 +138,36 @@ def main():
     pesos_links = gerar_pesos_links(matriz_grupos)
     (V,L,C) = gerar_matriz_de_ligacao(matriz_grupos,paginas_cacique,pesos_links)
 
-
-
     x0 = 230*[1/230]
-    y=calcula_y(x0,V,L,C)
+    y = calcular_y(x0,V,L,C)
 
-    k=0
-    x1=x0
-
+    x1 = x0
     m = 0.15
     x2 = soma(multEscalar(y,1-m),multEscalar(x0,m))
 
     while(norma(sub(x2,x1))>10**(-5)):
-        k=k+1
         x1=x2
-        y=calcula_y(x1,V,L,C)
+        y=calcular_y(x1,V,L,C)
         x2 = soma(multEscalar(y,1-m),multEscalar(x0,m))
 
-    add=0
-    for i in y:
-        add+=i
-        if i<0: print('menor q zero')
-
+    # Cria uma lista de tuplas na forma [(pagina,importancia)]
     paginas_rankeadas = list(enumerate(x2))
-    paginas_rankeadas_sem_repeticao = []
+    print(paginas_rankeadas)
 
+    # Cria uma lista na forma [(pagina,importancia)] somente com o cacique e a
+    # primeira página indio de cada grupo
+    paginas_rankeadas_sem_repeticao = []
     for pagina_cacique in paginas_cacique:
         paginas_rankeadas_sem_repeticao.append(paginas_rankeadas[pagina_cacique-1])
         paginas_rankeadas_sem_repeticao.append(paginas_rankeadas[pagina_cacique])
 
+    # Ordena os elementos da lista criada em ordem descrescente de importância
     paginas_rankeadas_sem_repeticao = sorted(paginas_rankeadas_sem_repeticao,
                                             key = lambda item: item[1],
                                             reverse=True)
 
-    for pagina in enumerate(paginas_rankeadas_sem_repeticao):
-        print(pagina)
+    # Printa uma tabela com os rankings, números da paginas, importancias, e indica
+    # se é cacique ou não
     print("\n|{0:^9}|{1:^8}|{2:^10}|{3:^19}|".format("Ranking","Página","Cacique?","Importância"))
     for pagina in enumerate(paginas_rankeadas_sem_repeticao):
         print("|{rank:^9}|{pag:^8}|{cacique:^10}|{imp:^19.12}|".format(
@@ -188,8 +175,5 @@ def main():
                                                                     pag=pagina[1][0]+1,
                                                                     cacique= "Sim" if pagina[1][0]+1 in paginas_cacique else "Não",
                                                                     imp=pagina[1][1]))
-
-    print(add)
-    print(k)
 
 main()
